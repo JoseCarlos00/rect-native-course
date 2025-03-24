@@ -1,6 +1,8 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, Alert } from 'react-native';
 
 export default function App() {
+	const handleOnPress = () => {};
+
 	return (
 		<View style={styles.container}>
 			<Text style={styles.text}>Hello word</Text>
@@ -12,7 +14,7 @@ export default function App() {
 
 			<Button
 				title='Click me'
-				onPress={() => console.log('Button clicked')}
+				onPress={handleOnPress}
 			/>
 		</View>
 	);
