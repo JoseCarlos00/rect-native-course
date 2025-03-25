@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Button, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, Alert, TouchableOpacity, ScrollView } from 'react-native';
 import ImagePickerExample from './component/ImagePickerExample';
 
 export default function App() {
@@ -22,7 +22,9 @@ export default function App() {
 				<Text style={styles.text}>Click me</Text>
 			</TouchableOpacity>
 
-			<ImagePickerExample />
+			<ScrollView>
+				<ImagePickerExample />
+			</ScrollView>
 		</View>
 	);
 }
