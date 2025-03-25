@@ -1,7 +1,10 @@
-import { StyleSheet, Text, View, Image, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, Alert, TouchableOpacity } from 'react-native';
+import ImagePickerExample from './component/ImagePickerExample';
 
 export default function App() {
-	const handleOnPress = () => {};
+	const handleOnPress = () => {
+		Alert.alert('Users', 'This is an alert message');
+	};
 
 	return (
 		<View style={styles.container}>
@@ -12,10 +15,14 @@ export default function App() {
 				style={styles.image}
 			/>
 
-			<Button
-				title='Click me'
+			<TouchableOpacity
+				style={styles.button}
 				onPress={handleOnPress}
-			/>
+			>
+				<Text style={styles.text}>Click me</Text>
+			</TouchableOpacity>
+
+			<ImagePickerExample />
 		</View>
 	);
 }
@@ -23,23 +30,34 @@ export default function App() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#1f1f1f',
-		color: '#9cdcfe',
+		backgroundColor: '#0d1117',
+		color: '#f0f6fc',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
 	text: {
-		color: '#9cdcfe',
+		color: '#f0f6fc',
 		fontSize: 20,
 	},
 	image: {
 		width: 200,
-		height: 300,
+		height: 200,
 	},
 	batmanLogo: {
 		width: 200,
 		height: 100,
 		marginTop: 50,
+	},
+	button: {
+		backgroundColor: '#238636',
+		padding: 10,
+		borderRadius: 10,
+		marginTop: 20,
+		width: 200,
+		height: 50,
+		color: '#f0f6fc',
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 });
 
