@@ -1,9 +1,24 @@
 import * as ImagePicker from 'expo-image-picker';
+import * as Sharing from 'expo-sharing';
+
 import { useState } from 'react';
-import { StyleSheet, View, Button, Image } from 'react-native';
+import { StyleSheet, View, Button, Image, TouchableOpacity, Platform } from 'react-native';
 
 export default function ImagePickerExample() {
-	const [image, setImage] = useState({});
+	const [image, setImage] = useState({ uri: null });
+
+	const openShareDialog = async () => {
+		const isSharing = await Sharing.isAvailableAsync();
+
+		console.log({ isSharing });
+
+		if (!isSharing) {
+			alert('Sharing is not available on this platform.');
+			return;
+		}
+
+		Sharing.shareAsync(image.uri, { dialogTitle: 'Share image' });
+	};
 
 	const pickImage = async () => {
 		const permissions = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -18,13 +33,15 @@ export default function ImagePickerExample() {
 		let result = await ImagePicker.launchImageLibraryAsync({
 			mediaTypes: ['images', 'videos'],
 			allowsEditing: true,
-			// aspect: [4, 3],
+			aspect: [4, 3],
 			quality: 1,
 		});
 
-		console.log(result);
-
 		if (result.canceled) {
+			return;
+		}
+
+		if (Platform.OS === 'web') {
 			return;
 		}
 
@@ -34,15 +51,18 @@ export default function ImagePickerExample() {
 	return (
 		<View style={styles.container}>
 			<Button
-				title='Open Image'
-				onPress={pickImage}
+				title={image.uri ? 'Compartir' : 'Open Image'}
+				onPress={image.uri ? openShareDialog : pickImage}
 			/>
-			{image.uri && (
-				<Image
-					source={{ uri: image.uri }}
-					style={image}
-				/>
-			)}
+
+			<TouchableOpacity onPress={pickImage}>
+				{image.uri && (
+					<Image
+						source={{ uri: image.uri }}
+						style={styles.image}
+					/>
+				)}
+			</TouchableOpacity>
 		</View>
 	);
 }
@@ -60,6 +80,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 	},
 	image: {
+		marginTop: 20,
 		width: 200,
 		height: 200,
 	},

@@ -2,6 +2,10 @@ import { StyleSheet, Text, View, Image, Button, Alert, TouchableOpacity, ScrollV
 import ImagePickerExample from './component/ImagePickerExample';
 
 export default function App() {
+	return <ImagePickerExample />;
+}
+
+function RenderApp() {
 	const handleOnPress = () => {
 		Alert.alert('Users', 'This is an alert message');
 	};
@@ -21,10 +25,6 @@ export default function App() {
 			>
 				<Text style={styles.text}>Click me</Text>
 			</TouchableOpacity>
-
-			<ScrollView>
-				<ImagePickerExample />
-			</ScrollView>
 		</View>
 	);
 }
